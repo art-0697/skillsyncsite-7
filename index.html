@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Sync - Connect, Learn, Grow</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    /* New Professional Color Palette (Inspired by provided Dark Grey and Teal shades) */
+    :root {
+        --primary-color: #17252A; /* Dark Grey/Blue - main strong base color */
+        --secondary-color: #3AAFA9; /* Mid Teal - for accents and secondary elements */
+        --accent-color: #2B7A78; /* Dark Teal - for highlights or stronger accents */
+        --dark-text: #17252A; /* Dark Grey/Blue - excellent readability on light backgrounds */
+        --light-text: #FEFFFF; /* Pure White - for text on dark backgrounds */
+        --bg-light: #DEF2F1; /* Light Mint/White - for main light backgrounds */
+        --bg-dark: #17252A; /* Same as primary for dark sections like footer */
+        --gradient-hero: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); /* Teal to Dark Grey for hero */
+        --gradient-section-alt: linear-gradient(135deg, #DEF2F1, #3AAFA9); /* Light Mint to Mid Teal for alternate sections */
+        --transition-speed: 0.4s ease-in-out;
+        --border-radius: 12px;
+        --box-shadow-light: 0 8px 20px rgba(0, 0, 0, 0.07);
+        --box-shadow-dark: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Specific element style adjustments */
+
+    /* Footer */
+    .main-footer {
+        background: linear-gradient(to right, var(--accent-color),#0d789f); /* Darker Teal to Dark Grey for footer */
+        color: var(--light-text);
+    }
+
+    /* Call to Action Section */
+    .cta-section {
+        background: var(--gradient-section-alt);
+        color: var(--dark-text);
+    }
+
+    .cta-section h2,
+    .cta-section p,
+    .cta-section small {
+        color: var(--dark-text);
+    }
+
+    /* Button Primary Hover */
+    .btn-primary:hover {
+        background-color: #256664; /* Darker shade of accent color */
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button Secondary */
+    .btn-secondary {
+        background: var(--gradient-section-alt);
+        color: var(--dark-text); /* Changed to dark-text for better visibility on this gradient */
+    }
+
+    /* Contact Form Input Focus */
+    .form-group input[type="text"]:focus,
+    .form-group input[type="email"]:focus,
+    .form-group textarea:focus {
+        box-shadow: 0 0 0 3px rgba(23, 37, 42, 0.2); /* Using derivative of primary-color for shadow */
+    }
+
+    /* Profile Card Avatars - Update these directly in your HTML for best results */
+    /*
+    Example of how to update your profile avatar `src` attributes in HTML:
+    For Alice Johnson:
+    <img src="https://via.placeholder.com/90/17252A/FEFFFF?text=AJ" alt="Profile Picture of Alice Johnson" class="profile-avatar">
+    
+    For Bob Williams:
+    <img src="https://via.placeholder.com/90/17252A/FEFFFF?text=BW" alt="Profile Picture of Bob Williams" class="profile-avatar">
+    
+    And so on for other profiles, using:
+    `https://via.placeholder.com/90/PRIMARY_COLOR_HEX/LIGHT_TEXT_COLOR_HEX?text=INITIALS`
+    */
+
+    /* Basic Reset & Body Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1.7;
+        color: var(--dark-text);
+        background-color: var(--bg-light);
+        scroll-behavior: smooth;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 25px;
+    }
+
+    /* Header */
+    .main-header {
+        background: var(--gradient-hero);
+        color: var(--light-text);
+        padding: 18px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--box-shadow-dark);
+    }
+
+    .main-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.9em;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .logo a {
+        color: var(--light-text);
+        text-decoration: none;
+        transition: color var(--transition-speed);
+    }
+
+    .logo a:hover {
+        color: var(--secondary-color);
+    }
+
+    .main-nav .nav-list {
+        list-style: none;
+        display: flex;
+    }
+
+    .main-nav .nav-list li {
+        margin-left: 35px;
+    }
+
+    .main-nav .nav-list a {
+        color: var(--light-text);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 0;
+        position: relative;
+        transition: color var(--transition-speed), transform var(--transition-speed);
+        font-size: 1.05em;
+    }
+
+    .main-nav .nav-list a::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background-color: var(--secondary-color);
+        border-radius: 2px;
+        transition: width var(--transition-speed);
+    }
+
+    .main-nav .nav-list a:hover::after {
+        width: 100%;
+    }
+
+    .main-nav .nav-list a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+        display: none;
+        font-size: 2em;
+        cursor: pointer;
+        color: var(--light-text);
+        transition: transform var(--transition-speed);
+    }
+
+    .menu-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    /* Hero Section */
+    .hero-section {
+background: linear-gradient(90deg, #2B7A78 0%, #3AAFA9 50%, #17252A 100%); /* Adjusted gradient for better balance */
+color: var(--light-text);
+padding: 120px 0;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 80vh;
+position: relative;
+overflow: hidden;
+border-bottom-left-radius: 50px;
+border-bottom-right-radius: 50px;
+}
+    .hero-section::before,
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .hero-section::before {
+        top: -60px;
+        left: -60px;
+        width: 220px;
+        height: 220px;
+        animation: floatShape 12s infinite ease-in-out;
+    }
+
+    .hero-section::after {
+        bottom: -80px;
+        right: -80px;
+        width: 280px;
+        height: 280px;
+        animation: floatShape 14s infinite reverse ease-in-out;
+    }
+
+    @keyframes floatShape {
+        0% { transform: translate(0, 0) scale(1); opacity: 1; }
+        33% { transform: translate(25px, 35px) scale(1.05); opacity: 0.9; }
+        66% { transform: translate(-15px, -20px) scale(0.95); opacity: 0.95; }
+        100% { transform: translate(0, 0) scale(1); opacity: 1; }
+    }
+
+    .hero-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .hero-content h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 4em;
+        margin-bottom: 25px;
+        font-weight: 700;
+        line-height: 1.2;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content p {
+        font-size: 1.4em;
+        margin-bottom: 50px;
+        opacity: 0.95;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        padding: 14px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all var(--transition-speed);
+        cursor: pointer;
+        border: none;
+        font-size: 1.05em;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .btn-primary {
+        background-color: var(--secondary-color);
+        color: var(--light-text);
+        box-shadow: var(--box-shadow-light);
+    }
+
+
+    .btn-secondary {
+        background: var(--gradient-section-alt);
+        color: var(--dark-text);
+        box-shadow: var(--box-shadow-dark);
+    }
+
+    .btn-secondary:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        opacity: 0.95;
+    }
+
+    .btn-outline {
+        background: none;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        padding: 12px 30px;
+    }
+
+    .btn-outline:hover {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+        transform: translateY(-4px);
+        box-shadow: var(--box-shadow-light);
+    }
+
+    .btn-primary-light {
+        background-color: var(--light-text);
+        color: var(--secondary-color);
+        border: 2px solid var(--secondary-color);
+        padding: 12px 30px;
+    }
+
+    .btn-primary-light:hover {
+        background-color: var(--secondary-color);
+        color: var(--light-text);
+        transform: translateY(-4px);
+        box-shadow: var(--box-shadow-light);
+    }
+
+    /* Sections */
+    .section-padding {
+        padding: 90px 0;
+        text-align: center;
+    }
+
+    h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3.2em;
+        margin-bottom: 25px;
+        color: var(--dark-text);
+        position: relative;
+        padding-bottom: 15px;
+        font-weight: 700;
+    }
+
+    h2::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 5px;
+        background: var(--gradient-hero);
+        border-radius: 3px;
+    }
+
+    p {
+        font-size: 1.1em;
+        color: var(--dark-text); /* Ensure paragraph text uses dark-text variable */
+        max-width: 800px;
+        margin: 0 auto 40px;
+    }
+
+    /* Features Section */
+    .features-section {
+        background-color: var(--bg-light);
+        padding-top: 120px;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+        margin-top: 60px;
+    }
+
+    .feature-item {
+        background-color: #fff;
+        padding: 35px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-light);
+        text-align: center;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-12px);
+        box-shadow: var(--box-shadow-dark);
+    }
+
+    .feature-item .icon-large {
+        font-size: 4em;
+        margin-bottom: 25px;
+        background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .feature-item h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.6em;
+        margin-bottom: 15px;
+        color: var(--dark-text);
+        font-weight: 600;
+    }
+
+    .feature-item p {
+        font-size: 1em;
+        color: #666;
+        margin: 0;
+    }
+
+    /* CTA Section (Create Profile) */
+    .cta-section {
+        background: var(--gradient-section-alt);
+        color: var(--dark-text);
+        padding: 90px 0;
+        margin-top: 80px;
+    }
+
+    .cta-section h2 {
+        color: var(--dark-text);
+    }
+
+    .cta-section h2::after {
+        background: var(--accent-color);
+    }
+
+    .cta-section p {
+        font-size: 1.3em;
+        margin-bottom: 40px;
+        opacity: 0.95;
+        color: var(--dark-text);
+    }
+
+    .cta-section small {
+        display: block;
+        margin-top: 25px;
+        opacity: 0.8;
+        font-size: 0.9em;
+        color: var(--dark-text);
+    }
+
+    /* Browse Profiles Section */
+    .browse-section {
+        background: linear-gradient(to bottom right, var(--bg-light), var(--gradient-section-alt)); /* Using new palette */
+    }
+
+    .profile-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+        margin-top: 60px;
+    }
+
+    .profile-card {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-light);
+        text-align: center;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .profile-card:hover {
+        transform: translateY(-12px);
+        box-shadow: var(--box-shadow-dark);
+    }
+
+    .profile-avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+        border: 4px solid var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.2);
+    }
+
+    .profile-card h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5em;
+        margin-bottom: 12px;
+        color: var(--dark-text);
+        font-weight: 600;
+    }
+
+    .profile-card p {
+        font-size: 0.98em;
+        color: #555;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .profile-card p i {
+        color: var(--secondary-color);
+        font-size: 1.1em;
+    }
+
+    .profile-card .btn {
+        margin-top: 20px;
+        width: 90%;
+        max-width: 220px;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        background: linear-gradient(to top right, var(--bg-light), var(--light-text)); /* Lightest shades for contact */
+    }
+
+    .contact-form {
+        max-width: 700px;
+        margin: 50px auto 0;
+        text-align: left;
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-light);
+        background-color: #fcfcfc;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: var(--dark-text);
+        font-size: 1.05em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1em;
+        font-family: 'Open Sans', sans-serif;
+        transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .contact-form .btn {
+        width: auto;
+        padding: 14px 45px;
+        margin-top: 15px;
+        float: right;
+    }
+
+    /* Footer */
+    .main-footer {
+        color: var(--light-text);
+        padding: 45px 0;
+        text-align: center;
+        font-size: 0.95em;
+        margin-top: 80px;
+    }
+
+    .main-footer .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .social-links a {
+        color: var(--light-text);
+        font-size: 1.7em;
+        margin: 0 18px;
+        transition: color var(--transition-speed), transform var(--transition-speed);
+    }
+
+    .social-links a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-4px) scale(1.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .main-header .container {
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            flex-basis: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-toggle {
+            display: block;
+            position: absolute;
+            right: 25px;
+            top: 25px;
+        }
+
+        .main-nav {
+            flex-basis: 100%;
+            background: var(--gradient-hero);
+            flex-direction: column;
+            height: 0;
+            overflow: hidden;
+            transition: height var(--transition-speed), padding var(--transition-speed);
+            box-shadow: var(--box-shadow-dark);
+            padding: 0;
+        }
+
+        .main-nav.active {
+            height: auto;
+            padding: 20px 0;
+        }
+
+        .main-nav .nav-list {
+            flex-direction: column;
+            width: 100%;
+            padding: 0;
+        }
+
+        .main-nav .nav-list li {
+            margin: 0;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .main-nav .nav-list li:last-child {
+            border-bottom: none;
+        }
+
+        .main-nav .nav-list a {
+            display: block;
+            padding: 10px 0;
+        }
+        .main-nav .nav-list a::after {
+            height: 2px;
+        }
+
+        .hero-content h2 {
+            font-size: 3em;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+        }
+
+        h2 {
+            font-size: 2.5em;
+        }
+
+        .features-grid,
+        .profile-cards-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-card p {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .contact-form {
+            padding: 30px;
+        }
+
+        .contact-form .btn {
+            float: none;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 15px;
+        }
+
+        .logo {
+            font-size: 1.7em;
+            margin-bottom: 10px;
+        }
+
+        .menu-toggle {
+            right: 15px;
+            top: 0px;
+            font-size: 1.8em;
+        }
+
+        .hero-section {
+            padding: 80px 0;
+            min-height: 65vh;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            font-size: 0.95em;
+        }
+
+        .section-padding {
+            padding: 70px 0;
+        }
+
+        h2 {
+            font-size: 2.2em;
+        }
+
+        .feature-item,
+        .profile-card,
+        .contact-form {
+            padding: 25px;
+        }
+
+        .feature-item .icon-large {
+            font-size: 3.5em;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animated {
+        animation: fadeInUp 1s ease forwards;
+        opacity: 0;
+    }
+
+    /* New CSS for Accordion/Collapse functionality */
+    .accordion-item {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: var(--border-radius);
+        margin-bottom: 20px;
+        box-shadow: var(--box-shadow-light);
+        overflow: hidden;
+    }
+
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+        cursor: pointer;
+        background-color: var(--bg-light);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3em;
+        font-weight: 600;
+        color: var(--dark-text);
+        transition: background-color var(--transition-speed);
+    }
+
+    .accordion-header:hover {
+        background-color: #f0f0f0;
+    }
+
+    .accordion-header .icon {
+        font-size: 1.2em;
+        transition: transform var(--transition-speed);
+        color: var(--secondary-color);
+    }
+
+    .accordion-content {
+        max-height: 0;
+        padding: 0 30px;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        color: #555;
+        text-align: left;
+    }
+
+    .accordion-content p {
+        margin: 15px 0;
+        font-size: 1em;
+        line-height: 1.6;
+    }
+
+    /* State for active accordion item */
+    .accordion-item.active .accordion-header .icon {
+        transform: rotate(90deg);
+    }
+
+    .accordion-item.active .accordion-content {
+        max-height: 200px; /* This will be overridden by JS scrollHeight, but good fallback */
+        padding: 20px 30px;
+    }
+    .profile-form-container {
+    margin-top: 40px;
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 450px;
+  width: 90%;
+  text-align: left;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  position: relative;
+  animation: fadeInUp 0.4s ease;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.4em;
+  cursor: pointer;
+  color: #333;
+}
+
+
+</style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container animated">
+            <h1 class="logo"><a href="#home">SkillSync</a></h1>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#create-profile">Join Us</a></li>
+                    <li><a href="#browse-profiles">Browse Talent</a></li>
+                    <li><a href="#faq">FAQ</a></li> <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container animated">
+                <div class="hero-content">
+                    <h2>Empower Your Growth. Share Your Expertise.</h2>
+                    <p>SkillSync is your premier platform to connect with a vibrant community, exchange invaluable knowledge, and collaboratively enhance your capabilities.</p>
+                    <a href="#create-profile" class="btn btn-primary">Start Your Skill Journey</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section section-padding">
+            <div class="container animated">
+                <h2>Key Features</h2>
+                <p>Discover how SkillSync empowers your learning and sharing experience.</p>
+                <div class="features-grid">
+    <div class="feature-item animated">
+        <i class="fas fa-id-card icon-large"></i>
+        <h3>Dynamic Profiles</h3>
+        <p>Craft a compelling profile highlighting your strengths and learning aspirations.</p>
+    </div>
+    <div class="feature-item animated">
+        <i class="fas fa-handshake icon-large"></i>
+        <h3>Seamless Connections</h3>
+        <p>Effortlessly find and initiate communication with ideal skill-swap partners.</p>
+    </div>
+    <div class="feature-item animated">
+        <i class="fas fa-calendar-check icon-large"></i>
+        <h3>Integrated Scheduling</h3>
+        <p>Organize and manage your skill-exchange sessions with our intuitive calendar.</p>
+    </div>
+    <div class="feature-item animated">
+        <i class="fas fa-medal icon-large"></i>
+        <h3>Trust & Reputation</h3>
+        <p>Foster credibility through peer reviews and a transparent rating system.</p>
+    </div>
+    <div class="feature-item animated">
+        <i class="fas fa-comments icon-large"></i>
+        <h3>Direct Communication</h3>
+        <p>Instantly message and chat with potential skill-swap partners to discuss collaborations.</p>
+    </div>
+    <div class="feature-item animated">
+        <i class="fas fa-book-open icon-large"></i>
+        <h3>Resource Sharing</h3>
+        <p>Share and access valuable learning materials and tools within the community.</p>
+    </div>
+</div>
+            </div>
+        </section>
+
+        <section id="create-profile" class="cta-section section-padding">
+            <div class="container animated">
+                <h2>Ready to Elevate Your Skills?</h2>
+                <p>Join our thriving community! Creating your SkillSync profile is quick, easy, and opens up a world of possibilities.</p>
+              <button type="button" class="btn btn-secondary" id="toggleProfileBtn">Create My Profile Now</button>
+
+                <small>(This button would lead to a dedicated registration page in a live application.)</small>
+                <div id="profile-form" class="profile-form-container animated" style="display: none;">
+    <form class="contact-form" id="createProfileForm">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="emailProfile">Email</label>
+            <input type="email" id="emailProfile" name="emailProfile" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="offering">Skills You Can Teach</label>
+            <input type="text" id="offering" name="offering" placeholder="e.g. JavaScript, Photoshop" required>
+        </div>
+        <div class="form-group">
+            <label for="seeking">Skills You Want to Learn</label>
+            <input type="text" id="seeking" name="seeking" placeholder="e.g. Python, Public Speaking" required>
+        </div>
+        <div class="form-group">
+            <label for="experience">Years of Experience</label>
+            <input type="text" id="experience" name="experience" placeholder="e.g. 2 Years">
+        </div>
+        <div class="form-group">
+            <label for="fee">Optional Teaching Fee (₹)</label>
+            <input type="text" id="fee" name="fee" placeholder="Enter amount or leave blank">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Profile</button>
+    </form>
+</div>
+
+            </div>
+        </section>
+
+        <section id="browse-profiles" class="browse-section section-padding">
+            <div class="container">
+                <h2>Explore Member Profiles</h2>
+                <p>Browse a diverse range of skills offered and sought by our community members.</p>
+                <div class="profile-cards-grid">
+                    <div class="profile-card animated">
+                        <img src="./images/art1.jpg.jpeg" alt="Profile Picture of Arthy" class="profile-avatar">
+                        <h3>Arthy</h3>
+                        <p class="skills-offering"><i class="fas fa-chalkboard-teacher"></i> Offering: UI/UX Design, Photoshop</p>
+                        <p class="skills-seeking"><i class="fas fa-search"></i> Seeking: Python Programming, Data Analysis</p>
+                        <button class="btn btn-outline">View Profile</button>
+                    </div>
+                    <div class="profile-card animated">
+                        <img src="./images/kamali.jpg.jpeg" alt="Profile Picture of Kamali Sri" class="profile-avatar">
+                        <h3>Kamali Sri</h3>
+                        <p class="skills-offering"><i class="fas fa-chalkboard-teacher"></i> Offering: Web Development (React), Python</p>
+                        <p class="skills-seeking"><i class="fas fa-search"></i> Seeking: Public Speaking, German Language</p>
+                        <button class="btn btn-outline">View Profile</button>
+                    </div>
+                    <div class="profile-card animated">
+                        <img src="./images/hari.jpg.jpeg" alt="Profile Picture of Harini Shree" class="profile-avatar">
+                        <h3>Harini Shree</h3>
+                        <p class="skills-offering"><i class="fas fa-chalkboard-teacher"></i> Offering: Creative Writing, Digital Photography</p>
+                        <p class="skills-seeking"><i class="fas fa-search"></i> Seeking: Video Editing, Music Production</p>
+                        <button class="btn btn-outline">View Profile</button>
+                    </div>
+                    <div class="profile-card animated">
+                        <img src="./images/kiki.jpg.jpeg" alt="Profile Picture of keerthiga" class="profile-avatar">
+                        <h3>keerthiga</h3>
+                        <p class="skills-offering"><i class="fas fa-chalkboard-teacher"></i> Offering: Advanced Excel, Data Analysis</p>
+                        <p class="skills-seeking"><i class="fas fa-search"></i> Seeking: Graphic Design, Digital Marketing</p>
+                        <button class="btn btn-outline">View Profile</button>
+                    </div>
+                    <div class="profile-card animated">
+                        <img src="./images/laks.jpg.jpeg" alt="Profile Picture of Lakshana" class="profile-avatar">
+                        <h3>Lakshana</h3>
+                        <p class="skills-offering"><i class="fas fa-chalkboard-teacher"></i> Offering: Full Stack Development,UI Prototyping</p>
+                        <p class="skills-seeking"><i class="fas fa-search"></i> Seeking: Cloud Computing, Blockchain Basics</p>
+                        <button class="btn btn-outline">View Profile</button>
+                    </div>
+                    <div class="profile-card animated">
+                        <img src="./images/thul.jpg.jpeg" alt="Profile Picture of Thulasi" class="profile-avatar">
+                        <h3>Thulasi</h3>
+                        <p class="skills-offering"><i class="fas fa-chalkboard-teacher"></i> Offering: Content Writing,SEO Strategy</p>
+                        <p class="skills-seeking"><i class="fas fa-search"></i> Seeking: Python for Data Science, Canva Mastery</p>
+                        <button class="btn btn-outline">View Profile</button>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-primary-light">Load More Profiles</button>
+            </div>
+            <!-- Profile Modal -->
+<div id="profileModal" style="display: none;" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3 id="modalName">Profile Name</h3>
+    <p><strong>Skills Offered:</strong> <span id="modalOffer"></span></p>
+    <p><strong>Skills Seeking:</strong> <span id="modalSeek"></span></p>
+    <p><strong>Experience:</strong> <span id="modalExp"></span></p>
+    <p><strong>Teaching Fee:</strong> ₹<span id="modalFee"></span></p>
+    <p><strong>Duration:</strong> <span id="modalDuration"></span></p>
+    <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+    <p><strong>Rating:</strong> <span id="modalRating">4.5 ★</span></p>
+  </div>
+</div>
+        </section>
+        <section id="faq" class="faq-section section-padding">
+    <div class="container animated">
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about SkillSync.</p>
+        <div class="accordion-container">
+            <div class="accordion-item animated">
+                <div class="accordion-header">
+                    What is SkillSync?
+                    <i class="fas fa-chevron-right icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>SkillSync is a platform designed to connect individuals who want to learn new skills with those who are willing to teach or exchange their expertise. It fosters a community of collaborative learning and growth.</p>
+                </div>
+            </div>
+            <div class="accordion-item animated">
+                <div class="accordion-header">
+                    How do I create a profile?
+                    <i class="fas fa-chevron-right icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Creating a profile on SkillSync is simple! Click on the "Create My Profile Now" button in the "Ready to Elevate Your Skills?" section. You'll be guided through a quick registration process where you can highlight your skills, what you're offering, and what you're seeking to learn.</p>
+                </div>
+            </div>
+            <div class="accordion-item animated">
+                <div class="accordion-header">
+                    Is SkillSync free to use?
+                    <i class="fas fa-chevron-right icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Yes, basic membership and skill exchange on SkillSync are absolutely free! We believe in fostering a community where knowledge can be shared freely. Future premium features may be introduced, but the core functionality will remain free.</p>
+                </div>
+            </div>
+            <div class="accordion-item animated">
+                <div class="accordion-header">
+                    How do I connect with other members?
+                    <i class="fas fa-chevron-right icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Once you've created your profile, you can browse through other member profiles in the "Browse Talent" section. Each profile has a "View Profile" button which will allow you to see more details and initiate a connection or message request directly to discuss a skill exchange.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="contact" class="contact-section section-padding">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p>We're here to help! Whether you have questions, feedback, or collaboration ideas, reach out to us.</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Type your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 SkillSync. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        const headerOffset = document.querySelector('.main-header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+
+                        // Close mobile menu if open
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                        }
+                    }
+                });
+            });
+
+            // Mobile menu toggle functionality
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mainNav = document.querySelector('.main-nav');
+
+            if (mobileMenu && mainNav) {
+                mobileMenu.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+
+            // Simple form submission handler for demonstration
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Prevent actual form submission
+
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset(); // Clear the form
+                });
+            }
+        });
+
+// Animate on scroll
+const animatedItems = document.querySelectorAll('.animated');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+animatedItems.forEach(item => {
+  item.style.animationPlayState = 'paused';
+  observer.observe(item);
+});
+// Accordion functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const accordionItem = this.closest('.accordion-item');
+                const accordionContent = this.nextElementSibling; // Get the content div
+
+                // Close other open accordions (optional, but common behavior)
+                accordionHeaders.forEach(otherHeader => {
+                    const otherItem = otherHeader.closest('.accordion-item');
+                    if (otherItem !== accordionItem && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherHeader.nextElementSibling.style.maxHeight = '0';
+                        otherHeader.nextElementSibling.style.padding = '0 30px';
+                    }
+                });
+
+                // Toggle the current accordion item
+                accordionItem.classList.toggle('active');
+                if (accordionItem.classList.contains('active')) {
+                    // Set max-height to content's scrollHeight for dynamic height
+                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                    accordionContent.style.padding = '20px 30px';
+                } else {
+                    accordionContent.style.maxHeight = '0';
+                    accordionContent.style.padding = '0 30px';
+                }
+            });
+        });
+        
+// Toggle visibility of the form with animation
+document.getElementById('toggleProfileBtn').addEventListener('click', function () {
+    const formContainer = document.getElementById('profile-form');
+
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        formContainer.style.opacity = 0;
+        formContainer.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => {
+            formContainer.style.opacity = 1;
+        }, 10);
+    } else {
+        formContainer.style.transition = 'opacity 0.5s ease-in-out';
+        formContainer.style.opacity = 0;
+        setTimeout(() => {
+            formContainer.style.display = 'none';
+        }, 500);
+    }
+});
+
+// Handle profile form submission
+document.getElementById('createProfileForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    alert('🎉 Profile created successfully!');
+    this.reset();
+});
+const profiles = [
+    {
+      name: "Arthy",
+      offering: "UI/UX Design, Photoshop",
+      seeking: "Python Programming, Data Analysis",
+      experience: "2 Years",
+      fee: "500 per hour",
+      duration:"2 hrs",
+       email:"arthy07skillsync@gmail",
+      rating: "4.8 ★"
+    },
+    {
+      name: "Kamali Sri",
+      offering: "Web Development (React), Python",
+      seeking: "Public Speaking, German Language",
+      experience: "3 Years",
+      fee: "300 per hour",
+      duration:"1.5 hrs",
+       email:"kamalisri52skillsync@gmail",
+      rating: "4.6 ★"
+    },
+    {
+        name:"Harini Shree",
+        offering:"Creative writing,Digital Photography",
+        seeking:"Video Editing,Music Production",
+        experience:"3 Years",
+        fee:"300 per hour",
+        duration:"1 hrs",
+        email:"hari61skillsync@gmail",
+        rating:"4.7 ★"
+    },
+    {
+        name:"Keerthiga",
+        offering:"Advanced Excel,Data Analysis",
+        seeking:"Graphic Design,Digital Marketing",
+        experience:"2 Years",
+        fee:"200 per hour",
+        duration:"1.5 hrs",
+        email:"kiki055skillsync@gmail",
+        rating:"4.8 ★"
+    },
+    {
+        name:"Lakshana",
+        offering:"Full Stack Development,UI prototyping",
+        seeking:"Cloud computing,Blockchain Basis",
+        experience:"2 Years",
+        fee:"500 per hour",
+        duration:"2 hrs",
+        email:"laks05skillsync@gmail",
+        rating:"4.9★"
+    },
+    {
+        name:"Thulasi",
+        offering:"Content Writing,SEO Stratergy",
+        seeking:"Python for data science,Canva Mastery",
+        experience:"3 Years",
+        fee:"600 per hour",
+        duration:"3 hrs",
+        email:"thulasi04skillsync@gmail",
+        rating:"4.9★"
+    },
+    // add other profiles similarly...
+  ];
+
+  document.querySelectorAll('.profile-card').forEach((card, index) => {
+    const viewBtn = card.querySelector('.btn-outline');
+    viewBtn.addEventListener('click', () => {
+      const profile = profiles[index];
+      document.getElementById('modalName').textContent = profile.name;
+      document.getElementById('modalOffer').textContent = profile.offering;
+      document.getElementById('modalSeek').textContent = profile.seeking;
+      document.getElementById('modalExp').textContent = profile.experience;
+      document.getElementById('modalFee').textContent = profile.fee;
+      document.getElementById('modalDuration').textContent = profile.duration;
+      document.getElementById('modalEmail').textContent = profile.email;
+      document.getElementById('modalRating').textContent = profile.rating;
+
+      document.getElementById('profileModal').style.display = 'flex';
+    });
+  });
+
+  document.querySelector('.close-modal').addEventListener('click', () => {
+    document.getElementById('profileModal').style.display = 'none';
+  });
+
+
+    </script>
+</body>
+</html>
